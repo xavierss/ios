@@ -49,12 +49,13 @@ module.exports = [
         ]
     },
     {
-        "id": "cordova-plugin-keyboard.keyboard",
-        "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
-        "pluginId": "cordova-plugin-keyboard",
+        "id": "ionic-plugin-keyboard.keyboard",
+        "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
+        "pluginId": "ionic-plugin-keyboard",
         "clobbers": [
-            "window.Keyboard"
-        ]
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -68,7 +69,7 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.2.3",
     "cordova-plugin-disable-ios11-statusbar": "1.0.0",
     "cordova-plugin-dialogs": "1.3.3",
-    "cordova-plugin-keyboard": "1.1.5"
+    "ionic-plugin-keyboard": "2.2.1"
 };
 // BOTTOM OF METADATA
 });

@@ -23,7 +23,7 @@
 		6F3330ABB92249CEABD78736 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A352A184DE64568A2763777 /* CDVNotification.m */; };
 		86A9AE0FE98B451C851DC445 /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2498CCCF6C16473DAAED9E57 /* CDVNotification.bundle */; };
 		0DF9ABF1499B4534A0B08443 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E00321306416424CBCEF5642 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2DB90A86564F4A5B8DEFBD21 /* CDVKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374EE15BA064AD7AE42AF00 /* CDVKeyboard.m */; };
+		CDA7D8A127C14AF88A91BDFB /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A93C5A9E3E44BDC9A14FED0 /* IonicKeyboard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,8 +74,8 @@
 		DFED40F6A9A14B13BCBF6FB9 /* CDVNotification.h */ = {isa = PBXFileReference; name = "CDVNotification.h"; path = "cordova-plugin-dialogs/CDVNotification.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		2498CCCF6C16473DAAED9E57 /* CDVNotification.bundle */ = {isa = PBXFileReference; name = "CDVNotification.bundle"; path = "CDVNotification.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 		E00321306416424CBCEF5642 /* AudioToolbox.framework */ = {isa = PBXFileReference; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		1374EE15BA064AD7AE42AF00 /* CDVKeyboard.m */ = {isa = PBXFileReference; name = "CDVKeyboard.m"; path = "cordova-plugin-keyboard/CDVKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		70922F67A73840E59F50212D /* CDVKeyboard.h */ = {isa = PBXFileReference; name = "CDVKeyboard.h"; path = "cordova-plugin-keyboard/CDVKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		9A93C5A9E3E44BDC9A14FED0 /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		6FB6DB7C1CB94F348F1416AB /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,8 +191,8 @@
 				C8FD37F36DBE44B892053156 /* DisableStatusbar.m */,
 				0A352A184DE64568A2763777 /* CDVNotification.m */,
 				DFED40F6A9A14B13BCBF6FB9 /* CDVNotification.h */,
-				1374EE15BA064AD7AE42AF00 /* CDVKeyboard.m */,
-				70922F67A73840E59F50212D /* CDVKeyboard.h */,
+				9A93C5A9E3E44BDC9A14FED0 /* IonicKeyboard.m */,
+				6FB6DB7C1CB94F348F1416AB /* IonicKeyboard.h */,
 			);
 			name = Plugins;
 			path = "SeoulTour/Plugins";
@@ -310,7 +310,7 @@
 				09768D4DB687440586DBB1DA /* CDVStatusBar.m in Sources */,
 				A17C991DDA6345ABB6921923 /* DisableStatusbar.m in Sources */,
 				6F3330ABB92249CEABD78736 /* CDVNotification.m in Sources */,
-				2DB90A86564F4A5B8DEFBD21 /* CDVKeyboard.m in Sources */,
+				CDA7D8A127C14AF88A91BDFB /* IonicKeyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
