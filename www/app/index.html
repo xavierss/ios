@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title></title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="lib/framwork7/css/framework7.ios.css">
+    <link rel="stylesheet" href="lib/framwork7/css/framework7.ios.colors.css">
+    <link rel="stylesheet" href="lib/framwork7/css/framework7-icons.css">
+    <link rel="stylesheet" href="lib/framwork7/css/framework7.upscroller.min.css">
+    <link rel="stylesheet" href="lib/framwork7/css/tourgide.css">
+    <link rel="stylesheet" href="lib/framwork7/css/kitchen-sink.css">
+
+    <!-- ionicons CSS -->
+    <link rel="stylesheet" href="lib/ioniconcs/css/ionicons.min.css">
+
+    <!-- OpenLayers CSS -->
+    <link rel="stylesheet" href="lib/OpenLayers/css/style.css">
+
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+</head>
+<body>
+
+<!-- 커버 나중에 이미지로 변경해야함. -->
+<div id='cover'></div>
+
+<!-- Framework7 에서 사용하는 DIV -->
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+
+<!-- 왼쪽 메뉴 -->
+<div class="panel panel-left panel-cover layout-dark">
+    <div class="page-content">
+        <div class="content-block-title">다같이 서울 투어</div>
+        <div class="content-block">
+            <div class="content-block-inner">
+                서울 투어 앱은 서울 관광 명소를 찾아 다닐때 사용할 수 있습니다. 관광명소를 찾아갈때 서울시에서 제공하는 따릉이(자전거)를 타고 이동 할 수 있도록 길 안내를 해드립니다.
+            </div>
+        </div>
+        <div id="routeInfoPanel" style="display: none;">
+            <div class="content-block-title">길 안내 <span>(총 거리: <strong id="labelTotalDistance" style="color: #4cd964;"></strong>)</span></div>
+            <div id='routePanel' class="row"></div>
+            <div id='routeDescription' class="row"></div>
+
+            <div class="content-block-title">검색 경로 100m 반경 맛집</div>
+            <div id='nearStoreList' class="list-block" style="color: white;">
+                <ul></ul>
+            </div>
+            <div id='emptyNearStoreList' class="list-block" style="color: white; display: none; margin: 0">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">경로에 맛집이 없습니다.</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Views-->
+<div class="views tabs toolbar-through">
+
+    <!-- Speed Dial Wrap -->
+    <div id='mapOverlay'></div>
+    <div id='mapSpeedDial' class="speed-dial map-speed-dial" style="z-index: 5100">
+        <a id='mapDial' href="#" class="floating-button color-green">
+            <i class="icon f7-icons ion-plus"></i>
+            <i class="icon f7-icons ion-close"></i>
+        </a>
+        <div class="speed-dial-buttons">
+            <a id='btnCurrentLocation' class='active color-red' href="#"><i class="icon f7-icons ion-pinpoint color-white"></i></a>
+            <a id='btnDestinationSearch' href="#" style="background-color: white;"><i class="icon f7-icons ion-merge color-pink"></i></a>
+            <a id='btnBikeTracking' href="#" style="background-color: white;"><i class="icon f7-icons ion-play color-pink"></i></a>
+            <a id='btnCleanMap' href="#" style="background-color: white;"><i class="icon f7-icons ion-trash-a color-pink"></i></a>
+        </div>
+    </div>
+
+    <!-- 지도 뷰 -->
+    <div id='mapView' class="view tab view-main active">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left theme-white">
+                    <a id='btnLeftMenu' href="#" class="link icon-only open-panel"><i class="icon f7-icons ion-grid"></i></a>
+                </div>
+                <div class="center sliding">지도</div>
+                <div class="right">
+                    <label id='trackingLabel' class="label-switch">
+                        <input id='checkTracking' type="checkbox"/>
+                        <div class="checkbox"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="pages navbar-through toolbar-through ">
+            <div data-page="mapIndex" class="page">
+                <!-- 페이지 컨텐츠-->
+                <div class="page-content">
+                    <div class="content-block" style="height: 100%; margin: 0; padding: 0">
+                        <div class="row" style="height: 100%;">
+                            <div class="col-100" style="height: 100%; padding: 0">
+                                <div id='map' style="height: 100%;">
+                                    <div style="position: absolute; right: 13px; z-index: 3110;">
+                                        <ul style="list-style:none;">
+                                            <li><a id='btnZoomIn' href="#" class="floating-button color-white" style="position: inherit; border-radius: 5%; width: 30px; height: 30px; color: black;"><i class="icon ion-plus-round color-pink"></i></a></li>
+                                            <li style="margin-top: 2px;"><a id='btnZoomOut' href="#" class="floating-button color-white" style="position: inherit; border-radius: 5%; width: 30px; height: 30px; color: black;"><i class="icon ion-minus-round color-pink"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- page-content end -->
+            </div>
+        </div>
+    </div> <!-- 지도 뷰 끝 -->
+
+    <!-- 길찾기 뷰 -->
+    <div id='contentView' class="view tab">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="center sliding">길찾기</div>
+            </div>
+        </div>
+        <div class="pages navbar-through">
+            <div data-page="contentIndex" class="page">
+                <div class="page-content">
+                    <div class="content-block-title">
+                        출발지와 도착지를 검색하여 빠른길을 찾아줍니다.
+                    </div>
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i id='btnStartMyLocation' class="f7-icons color-blue">flag</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input id='txtStart' type="text" class='enter-key-trigger routing-search' value="" placeholder="출발지를 입력하세요." data-for="btnStart">
+                                        </div>
+                                        <div class="item-after">
+                                            <a id='btnStart' href="#"><i class="f7-icons color-blue">search</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i id='btnEndMyLocation' class="f7-icons color-red">flag</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input id='txtEnd' type="text" class='enter-key-trigger routing-search' value="" placeholder="도착지를 입력하세요." data-for="btnEnd">
+                                        </div>
+                                        <div class="item-after">
+                                            <a id='btnEnd' href="#"><i class="f7-icons color-blue">search</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <div class="row">
+                                                <div class="col-50"><a id='btnRouteSearch' href="#" class="button button-fill color-blue">길찾기</a></div>
+                                                <div class="col-50"><a id='btnRouteReset' href="#" class="button button-fill color-red">지우기</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <a href="views/my-route-view.html" class="item-link item-content" data-context='{"name": "길찾기"}'>
+                                    <div class="item-inner">
+                                        <div id='routeSearchList' class="item-title">최근이용 목록</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block-title">검색 결과</div>
+                    <div id='routeResult' class="list-block media-list">
+                        <ul>
+                            <li class="route-empty-result">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input"><p>검색결과가 없습니다.</p></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> <!-- page-content end -->
+            </div>
+        </div>
+    </div> <!-- 길찾기 뷰 끝 -->
+
+    <!-- 따릉이 뷰 -->
+    <div id='bikeView' class="view tab" data-init="true">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left theme-white">
+                    <a id='btnBikeDraw' href="#" class="link icon-only"><span>지도로 보기</span></a>
+                </div>
+                <div class="center sliding">따릉이</div>
+                <div class="right theme-white">
+                    <a id='btnBikeRefresh' href="#" class="link icon-only"><i class="icon f7-icons ion-refresh"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="pages navbar-through">
+            <div data-page="bikeIndex" class="page">
+                <div class="page-content pull-to-refresh-content">
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="content-block">
+                        <p>현재 위치에서 가까운 따릉이 정보를 제공합니다. 따릉이에 표시된 거리는 내 위치와 직선거리를 기준으로 정렬되며 실제 따릉이 거리와는 차이가 있을 수 있습니다.</p>
+                        <p><strong>목록을 아래로 당기면 현재위치에서 가까운 순으로 정렬됩니다.</strong></p>
+                    </div>
+                    <div class="content-block-title"><p>현재위치: <strong><span id="txtCurrentLocation"></span> 근처</strong></p></div>
+                    <div id='bikeResult' class="list-block media-list">
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- 따릉이 뷰 끝 -->
+
+    <!-- 관광명소 뷰 -->
+    <div id='tourView' class="view tab" data-init="true">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="center sliding">관광명소</div>
+                <div class="subnavbar sliding">
+                    <div class="buttons-row theme-pink">
+                        <a href="#tabTourList" class="button active tab-link">관광명소</a>
+                        <a href="#tabParkList" class="button tab-link">공원</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pages navbar-through">
+            <div data-page="tourIndex" class="page">
+                <div data-page="tabs-animated" class="page with-subnavbar">
+                    <div class="tabs-animated-wrap">
+                        <div class="tabs">
+                            <div id="tabTourList" class="page-content tab active">
+                                <div class="row">
+                                    <div class="col-100">
+                                        <div id='tourListResult'></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tabParkList" class="page-content tab">
+                                <div class="row">
+                                    <div class="col-100">
+                                        <div id='parkResult'></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- 관광명소 뷰 끝 -->
+
+    <!-- 셋팅 뷰 -->
+    <div id='settingView' class="view tab">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="center sliding">설정</div>
+            </div>
+        </div>
+        <div class="pages navbar-through">
+            <div data-page="settingIndex" class="page">
+                <div class="page-content">
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <a href="views/visit-list.html" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">나의 찜</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="views/tracking-list.html" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">나의 트래킹</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="list-block">
+                        <ul>
+                            <!--<li>
+                                <a class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">제작자</div>
+                                    </div>
+                                </a>
+                            </li>-->
+                            <li>
+                                <a id='btnReset' href="#" class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">초기화</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- 셋팅 뷰 끝 -->
+
+    <!-- 맛집 카드 -->
+    <div class="picker-modal picker-info" style="height: 340px;">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div class="left"></div>
+                <div class="right theme-white"><a href="#" class="close-picker">닫기</a></div>
+            </div>
+        </div>
+        <div class="picker-modal-inner" style="background-color: white;">
+            <div class="store-swiper-container">
+                <div class="swiper-wrapper store-card-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 툴바 위치 -->
+    <div class="toolbar tabbar tabbar-labels">
+        <div class="toolbar-inner">
+            <a id='tabMapView' href="#mapView" data-init='true' class="tab-link active">
+                <i class="icon f7-icons ion-map inactive"></i>
+                <i class="icon f7-icons ion-map active color-pink"></i>
+                <span class="tabbar-label">지도</span>
+            </a>
+            <a id='tabContentView' href="#contentView" data-init='true' class="tab-link">
+                <!--<i class="icon f7-icons inactive">today<span class="badge bg-red">4</span></i>-->
+                <i class="icon f7-icons inactive">flag</i>
+                <i class="icon f7-icons active color-pink">flag_fill</i>
+                <span class="tabbar-label">길찾기</span>
+            </a>
+            <a id='tabBikeView' href="#bikeView" data-init='true' class="tab-link c">
+                <i class="icon f7-icons ion-android-bicycle inactive"></i>
+                <i class="icon f7-icons ion-android-bicycle active color-pink"></i>
+                <span class="tabbar-label">따릉이</span>
+            </a>
+            <a id='tabTourView' href="#tourView" data-init='true' class="tab-link">
+                <i class="icon f7-icons inactive">camera</i>
+                <i class="icon f7-icons active color-pink">camera_fill</i>
+                <span class="tabbar-label">관광명소</span>
+            </a>
+            <a id='tabSettingView' href="#settingView" data-init='true' class="tab-link">
+                <i class="icon f7-icons ion-ios-gear-outline inactive"></i>
+                <i class="icon f7-icons ion-ios-gear active color-pink"></i>
+                <span class="tabbar-label">설정</span>
+            </a>
+        </div>
+    </div> <!-- toolbar end-->
+
+    <!-- 팝업 -->
+    <div class="popup destination-popup">
+        <div class="view navbar-fixed">
+            <div class="pages">
+                <div data-page="destinationIndex" class="page">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="center">관광명소 검색</div>
+                            <div class="right theme-white"><a href="#" class="link close-popup">닫기</a></div>
+                        </div>
+                    </div>
+                    <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                        <div class="searchbar-input">
+                            <input type="search" placeholder="검색어를 입력하세요."><a href="#" class="searchbar-clear"></a>
+                        </div><a href="#" class="searchbar-cancel">취소</a>
+                    </form>
+
+                    <div class="searchbar-overlay"></div>
+                    <div class="page-content">
+                        <div class="content-block searchbar-not-found">
+                            <div class="content-block-inner">검색어에 해당하는 관광명소가 없습니다.</div>
+                        </div>
+
+                        <div id='tourSearchResult' class="list-block media-list list-block-search searchbar-found">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 착한가게 템플릿 -->
+<script type="text/template7" id="storeCardTemplate">
+    <div class="swiper-slide">
+        <div class="card ks-facebook-card">
+            <div class="card-header">
+                <div class="ks-facebook-avatar"><img data-src="{{imageUrl}}" width="34" height="34" class="swiper-lazy"/></div>
+                <div class="ks-facebook-name">{{name}} &nbsp; 좋아요: {{storeGood}}</div>
+                <div class="ks-facebook-date">{{storeAddr}}</div>
+            </div>
+            <div class="card-content">
+                <div class="card-content-inner">
+                    <p>{{storeInfo}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 자전거 템플릿 -->
+<script type="text/template7" id="bikeTemplate">
+    <li>
+        <a href="#" class="item-content item-link bike-item" data-lat="{{y}}" data-lon="{{x}}" data-station-no="{{stationNo}}" data-station-name="{{stationName}}" data-rack-tot-cnt="{{rackTotCnt}}">
+            <div class="item-media"><i class="f7-icons ion-android-bicycle color-pink"></i></div>
+            <div class="item-inner">
+                <div class="item-title-row">
+                    <div class="item-title">{{stationNo}}. {{stationName}}</div>
+                    <div class="item-after">{{guName}}</div>
+                </div>
+                <div class="item-text">{{distance}} / 자전거 거치대: {{rackTotCnt}}</div>
+            </div>
+        </a>
+    </li>
+</script>
+
+<!-- 길찾기 결과 템플릿 -->
+<script type="text/template7" id="routeResultTemplate">
+    <li class="route-result">
+        <a href="#" class="item-content item-link route-item" data-lat="{{latitude}}" data-lon="{{longitude}}" data-title='{{title}}'>
+            <div class="item-media"><img src="{{imageUrl}}" width="80"/></div>
+            <div class="item-inner">
+                <div class="row">
+                    <div class="col-100">
+                        <div class="item-title-row">
+                            <div class="item-title">{{title}}</div>
+                        </div>
+                        <div class="item-subtitle">{{address}}</div>
+                        <div class="item-text">{{phone}} | {{category}}</div>
+                    </div>
+                </div>
+                <div class="row" data-title='{{title}}' data-lat="{{latitude}}" data-lon="{{longitude}}">
+                    <div class="col-50"><button class="button button-raised route-start" style="width: 100%;">출발지</button></div>
+                    <div class="col-50"><button class="button button-raised route-end" style="width: 100%;">도착지</button></div>
+                </div>
+            </div>
+        </a>
+    </li>
+</script>
+
+<!-- 관광 검색 템플릿 -->
+<script type="text/template7" id="tourResultTemplate">
+    <li>
+        <a href="#" class="item-link item-content destination-item" data-lat="{{lat}}" data-lon="{{lon}}" data-title="{{title}}">
+            <div class="item-media"><img src="{{image}}" width="80"/></div>
+            <div class="item-inner">
+                <div class="item-title-row">
+                    <div class="item-title">{{title}}</div>
+                </div>
+                <div class="item-subtitle">{{address}}</div>
+            </div>
+        </a>
+    </li>
+</script>
+
+<!-- 관광 리스트 템플릿 -->
+<script type="text/template7" id="tourListTemplate">
+    <div class="row">
+        <div class="col-100">
+            <div class="card ks-facebook-card">
+                <div class="card-header no-border">
+                    <div class="ks-facebook-avatar"><img src="{{image}}" width="34" height="34"/></div>
+                    <div class="ks-facebook-name">{{name}}</div>
+                    <div class="ks-facebook-date">{{address}}</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <a href="views/tour-item-view.html" class="item-link item-content" data-context='{{context}}'><img src="{{image}}" width="100%"/></a>
+                    </div>
+                </div>
+                <div class="card-footer no-border">
+                    <a href="#" class="link tourLocation" data-lon="{{lon}}" data-lat="{{lat}}" data-name="{{name}}">위치</a>
+                    <a href="views/tour-item-view.html" class="link" data-context='{{context}}'>자세히</a>
+                    <a href="#" class="link tourRoute" data-lon="{{lon}}" data-lat="{{lat}}" data-name="{{name}}">길 안내</a>
+                </div>
+                {{#if registDt}}
+                <div class="row" style="background-color: #007aff;">
+                    <div class="col-100" style="margin-left: 10px; color: white;">
+                        <i class="icon f7-icons ion-ios-heart color-red"></i> {{registDt}} 에 찜을 하셨습니다.
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 공원 리스트 템플릿 -->
+<script type="text/template7" id="parkListTemplate">
+    <div class="row">
+        <div class="col-100">
+            <div class="card ks-facebook-card">
+                <div class="card-header no-border">
+                    <div class="ks-facebook-avatar"><img src="{{imageUrl}}" width="34" height="34"/></div>
+                    <div class="ks-facebook-name">{{parkNm}}</div>
+                    <div class="ks-facebook-date">{{parkAddr}}</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <a href="#" class="item-link item-content" data-context='{{context}}'><img src="{{imageUrl}}" width="100%"/></a>
+                    </div>
+                </div>
+                <div class="card-footer no-border">
+                    <a href="#" class="link parkLocation" data-x="{{x}}" data-y="{{y}}" data-title="{{parkNm}}">위치</a>
+                    <a href="#" class="link parkRoute" data-x="{{x}}" data-y="{{y}}" data-title="{{parkNm}}">길 안내</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 경로탐색 왼쪽 메뉴 템플릿 -->
+<script type="text/template7" id="routePanelTemplate">
+    <div class="col-100">
+        <div class="row">
+            <div class="col-100">
+                <div class="row" style="align-items: center;">
+                    <div class="col-20"><a class='btnRouteStart' href="#" data-lon="{{startLon}}" data-lat="{{startLat}}"><img src="{{imageFirst}}"></a></div>
+                    <div class="col-60" style="text-align: center; color: white;">{{info}}</div>
+                    <div class="col-20"><a class='btnRouteEnd' href="#" data-lon="{{endLon}}" data-lat="{{endLat}}"><img src="{{imageSecond}}"></a></div>
+                </div>
+                <div class="row">
+                    <div class="col-100">
+                        <p><span class="progressbar-infinite {{color}}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 경로탐색 왼쪽 메뉴 길 상세 -->
+<script type="text/template7" id="routeDescriptionTemplate">
+    <div class="col-100">
+        <div class="row" style="align-items: center; border-bottom: 1px solid #dad3d3; height: 100px;">
+            <div class="col-15">
+                <div class="circle1">{{index}}</div>
+            </div>
+            <div class="col-85">
+                <p>{{description}}</p>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 길찾기 100m 반경 맛집 -->
+<script type="text/template7" id="nearStoreTemplate">
+    <li>
+        <a href="#" class="item-link item-content near-store" data-feature-id="{{id}}">
+            <div class="item-media"><i class="icon f7-icons ion-android-restaurant" style="color: white; padding: 2px; border: 2px solid white; background: #3b7;"></i></div>
+            <div class="item-inner">
+                <div class="item-title">{{name}}</div>
+            </div>
+        </a>
+    </li>
+</script>
+
+<!-- DB 길찾기 -->
+<script type="text/template7" id="dbRouteTemplate">
+    <li class="swipeout">
+        <div class="swipeout-content">
+            <a href="#" class="item-content item-link db-route-item" data-id="{{id}}">
+                <div class="item-media"><img src="{{imageUrl}}" width="50"></div>
+                <div class="item-inner">
+                    <div class="item-title-row">
+                        <div class="item-after">{{regist_dt_str}}</div>
+                    </div>
+                    <div class="item-text">{{start_name}} → {{end_name}}</div>
+                </div>
+            </a>
+        </div>
+        <div class="swipeout-actions-right">
+            <a href="#" data-confirm="데이터를 삭제하시겠습니까?" data-id="{{id}}" class="swipeout-delete delete-route-item">삭제</a>
+        </div>
+    </li>
+</script>
+
+<!-- 트래킹 템플릿 -->
+<script type="text/template7" id="trackingTemplate">
+    <li class="swipeout">
+        <div class="swipeout-content">
+            <a href="#" class="item-content item-link tracking-item" data-id="{{id}}">
+                <div class="item-media"><i class="f7-icons ion-ios-navigate-outline color-pink"></i></div>
+                <div class="item-inner">
+                    <div class="item-title-row">
+                        <div class="item-title">이동거리: {{length}}</div>
+                        <div class="item-after">{{regist_dt_str}}</div>
+                    </div>
+                    <div class="item-text">트래킹 시간: {{tracking_time}}</div>
+                </div>
+            </a>
+        </div>
+        <div class="swipeout-actions-right">
+            <a href="#" data-confirm="데이터를 삭제하시겠습니까?" data-id="{{id}}" class="swipeout-delete delete-tracing-item">삭제</a>
+        </div>
+    </li>
+</script>
+
+<!-- cordova Library JS -->
+<script type="text/javascript" src="../cordova.js"></script>
+<script type="text/javascript" src="../cordova_plugins.js"></script>
+
+<!-- Path to Framework7 Library JS -->
+<script type="text/javascript" src="lib/framwork7/1.6.4/framework7.js"></script>
+<script type="text/javascript" src="lib/framwork7/framework7.upscroller.js"></script>
+<script type="text/javascript" src="lib/framwork7/framework7.tourguide.js"></script>
+
+<!-- OpenLayers Library JS -->
+<script type="text/javascript" src="lib/OpenLayers/OpenLayers.js"></script>
+
+<!-- OpenLayers-ext Library JS -->
+<script type="text/javascript" src="lib/OpenLayers-ext/Handler/LongClick.js"></script>
+<script type="text/javascript" src="lib/OpenLayers-ext/Control/LongClick.js"></script>
+<script type="text/javascript" src="lib/OpenLayers-ext/Renderer/fonticons/ionicons.js"></script>
+<script type="text/javascript" src="lib/OpenLayers-ext/Renderer/FASymbols.js"></script>
+<script type="text/javascript" src="lib/OpenLayers-ext/BounceEffect.js"></script>
+
+<!-- WebSQL Library JS -->
+<script type="text/javascript" src="lib/WebSQL/WebSQL.min.js"></script>
+
+<!-- Stopwatch Library JS -->
+<script type="text/javascript" src="lib/stopwatch/stopwatch.js"></script>
+
+<!-- Path to your app JS -->
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/event.js"></script>
+<script type="text/javascript" src="js/rest.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/db.js"></script>
+
+<script type="text/javascript">
+    $$(document).on('DOMContentLoaded', function(e){
+        document.addEventListener("deviceready", function(){
+            document.addEventListener("backbutton", function() {
+                if(myApp.getCurrentView().history.length === 1) {
+                    navigator.notification.confirm('앱을 종료하시겠습니까?', function(buttonIndex) {
+                        if(buttonIndex === 2) {
+                            navigator.app.exitApp();
+                        }
+                    }, '종료', ['취소', '종료']);
+                } else {
+                    myApp.getCurrentView().router.back();
+                }
+            }, false);
+
+            Template7.module.init();
+        }, false);
+    });
+</script>
+</body>
+</html>

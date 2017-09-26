@@ -1,0 +1,90 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding theme-white">
+            <a href="#" class="back link"><i class="icon icon-back"></i><span>{{title}}</span></a>
+        </div>
+        <div class="center sliding">{{name}}</div>
+    </div>
+</div>
+<div class="pages navbar-through">
+    <div data-page="tourItemIndex" class="page">
+        <div class="page-content">
+            <div data-pagination=".swiper-pagination"
+                 data-preload-images="true"
+                 data-lazy-loading="true"
+                 data-pagination-clickable="true"
+                 class="swiper-container swiper-init ks-lazy-slider">
+
+                <div class="swiper-wrapper">
+                    {{#each images}}
+                    <div class="swiper-slide">
+                        <img data-src="{{this}}" class="swiper-lazy"/>
+                        <div class="preloader"></div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="swiper-pagination swiper-pagination-white color-pink"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-100">
+                                <div class="chip" style="background: rgba(255, 45, 85, 0.8)"><div class="chip-label">주소</div></div>
+                                <span>{{address}}</span>
+                            </div>
+                            <div class="col-100">
+                                <div class="chip" style="background: rgba(255, 45, 85, 0.8)"><div class="chip-label">전화</div></div>
+                            {{#if tel}}
+                                <a href="#"><span>{{tel}}</span></a>
+                            {{else}}
+                                <span>등록된 전화번호가 없습니다.</span>
+                            {{/if}}
+                            </div>
+                        </div>
+                        <div class="row" style="height: 10px;"></div>
+                        <div class="row" style="text-align: center; border: 1px solid rgba(255, 45, 85, 0.5);">
+                            <div id='btnTourLocation' class="col-33" data-lon="{{x}}" data-lat="{{y}}" data-name="{{name}}">
+                                <div class="row">
+                                    <div class="col-100"><a href="#"><i class="icon f7-icons ion-ios-location color-pink"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-100"><span class="color-pink">위치</span></div>
+                                </div>
+                            </div>
+                            <div id='btnTourRoute' class="col-33" data-lon="{{x}}" data-lat="{{y}}" data-name="{{name}}">
+                                <div class="row">
+                                    <div class="col-100"><a href="#"><i class="icon f7-icons ion-navigate color-pink"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-100"><span class="color-pink">길 안내</span></div>
+                                </div>
+                            </div>
+                            <div id='btnAddVisit' class="col-33" data-id="{{id}}" data-lon="{{x}}" data-lat="{{y}}" data-name="{{name}}" style="display: none;">
+                                <div class="row">
+                                    <div class="col-100"><a href="#"><i class="icon f7-icons ion-ios-heart-outline color-pink"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-100"><span class="color-pink">찜</span></div>
+                                </div>
+                            </div>
+                            <div id='btnRemoveVisit' class="col-33" data-id="{{id}}" data-lon="{{x}}" data-lat="{{y}}" data-name="{{name}}" style="display: none;">
+                                <div class="row">
+                                    <div class="col-100"><a href="#"><i class="icon f7-icons ion-ios-heart color-pink"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-100"><span class="color-pink">찜</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 10px;"></div>
+                        <div class="row">
+                            <div class="col-100">{{info}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

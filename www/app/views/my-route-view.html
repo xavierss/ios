@@ -1,0 +1,29 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding theme-white">
+            <a href="#" class="back link"><i class="icon icon-back"></i><span>{{name}}</span></a>
+        </div>
+        <div class="center sliding">최근 이용 목록</div>
+        <div class="right theme-white">
+            <a id='btnDeleteRoutes' href="#" class="link icon-only">전체삭제</a>
+        </div>
+    </div>
+</div>
+<div class="pages navbar-through">
+    <div data-page="myRouteIndex" class="page">
+        <div class="page-content">
+            <div id='dbRouteResult' class="list-block media-list">
+                <ul class="empty-route-datas" style="display: none;">
+                    <li class="route-empty-result">
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input"><p>최근에 이용한 길찾기 데이터가 없습니다.</p></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="reoute-datas"></ul>
+            </div>
+        </div>
+    </div>
+</div>
