@@ -645,7 +645,18 @@ Template7.module.map = (function (app) {
                                     backgroundXOffset: 0,
                                     backgroundYOffset: -24,
                                     graphicZIndex: 11,
-                                    backgroundGraphicZIndex: 10,
+                                    backgroundGraphicZIndex: 10
+                                }
+                            })
+                        ]
+                    }),
+                    "select": new OpenLayers.Style({}, {
+                        rules: [
+                            new OpenLayers.Rule({
+                                symbolizer: {
+                                    pointRadius: 24,
+                                    symbolYOffset: -24,
+                                    backgroundYOffset: -32,
 
                                     fontSize: "14px",
                                     fontWeight: "bold",
@@ -694,7 +705,7 @@ Template7.module.map = (function (app) {
                 this.events.unregister('loadend', this, initLoading);
             }
 
-            var bikeSelectControl = new OpenLayers.Control.SelectFeature(bikeDrawLayer);
+            var bikeSelectControl = new OpenLayers.Control.SelectFeature([visitDrawLayer, bikeDrawLayer]);
             map.addControl(bikeSelectControl);
             bikeSelectControl.activate();
         },

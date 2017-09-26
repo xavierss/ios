@@ -265,17 +265,17 @@ var runApplication = function (moduls) {
 
                         switch(type) {
                             case 'bike':
-                                route.imageUrl = 'http://kr.seaicons.com/wp-content/uploads/2017/02/Bicycle-Green-2-icon.png';
+                                route.imageUrl = './images/icons/Bicycle-Green-2-icon.png';
                                 break;
                             case 'tour':
-                                route.imageUrl = 'http://kr.seaicons.com/wp-content/uploads/2015/10/seo-local-icon.png';
+                                route.imageUrl = './images/icons/seo-local-icon.png';
                                 break;
                             case 'park':
-                                route.imageUrl = 'http://kr.seaicons.com/wp-content/uploads/2015/10/Park-icon.png';
+                                route.imageUrl = './images/icons/Park-icon.png';
                                 break;
                             case 'nomal':
                             default:
-                                route.imageUrl = 'http://kr.seaicons.com/wp-content/uploads/2015/10/seo-local-icon.png';
+                                route.imageUrl = './images/icons/seo-local-icon.png';
                                 break;
                         }
 
@@ -452,15 +452,14 @@ var runApplication = function (moduls) {
      * 다음 키워드로 장소검색 API를 이용하여 길찾기(출발지, 도착지) 자동완성 기능 구현
      */
     function initComponent() {
-        // TODO: ios 에서 글씨가 깨짐..
-        /*var routeStartAutocomplete = getRouteAutocomplete('#txtStart', function(autocomplete, value){
+        var routeStartAutocomplete = getRouteAutocomplete('#txtStart', function(autocomplete, value){
             Template7.module.util.registRouteStart(value.title, {lon: value.longitude, lat: value.latitude});
             Template7.module.event.searchRoute(value.title);
         });
         var routeEndAutocomplete = getRouteAutocomplete('#txtEnd', function(autocomplete, value){
             Template7.module.util.registRouteEnd(value.title, {lon: value.longitude, lat: value.latitude});
             Template7.module.event.searchRoute(value.title);
-        });*/
+        });
 
         var stroeSwiper = myApp.swiper('.store-swiper-container', {
             preloadImages: false,
