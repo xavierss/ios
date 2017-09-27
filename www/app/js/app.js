@@ -265,17 +265,17 @@ var runApplication = function (moduls) {
 
                         switch(type) {
                             case 'bike':
-                                route.imageUrl = './images/icons/Bicycle-Green-2-icon.png';
+                                route.imageUrl = './images/icons/bike.png';
                                 break;
                             case 'tour':
-                                route.imageUrl = './images/icons/seo-local-icon.png';
+                                route.imageUrl = './images/icons/photo-camera.png';
                                 break;
                             case 'park':
-                                route.imageUrl = './images/icons/Park-icon.png';
+                                route.imageUrl = './images/icons/park.png';
                                 break;
                             case 'nomal':
                             default:
-                                route.imageUrl = './images/icons/seo-local-icon.png';
+                                route.imageUrl = './images/icons/route.png';
                                 break;
                         }
 

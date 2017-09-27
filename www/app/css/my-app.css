@@ -1,10 +1,8 @@
-/*
 div#contentView {
     -webkit-overflow-scrolling : touch !important;
     overflow: auto !important;
     height: 100% !important;
 }
-*/
 
 #mapOverlay {
     position: absolute;
