@@ -27,7 +27,6 @@
 
 .statusbar-overlay {
     background: #ff2d55;
-    opacity: 0;
 }
 
 .statusbar-overlay.with-panel-left {
