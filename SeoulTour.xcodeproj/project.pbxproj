@@ -24,6 +24,8 @@
 		86A9AE0FE98B451C851DC445 /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2498CCCF6C16473DAAED9E57 /* CDVNotification.bundle */; };
 		0DF9ABF1499B4534A0B08443 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E00321306416424CBCEF5642 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CDA7D8A127C14AF88A91BDFB /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A93C5A9E3E44BDC9A14FED0 /* IonicKeyboard.m */; };
+		CD0391A780EF42C18FBF16EE /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 666A6E61F8FC4B3280AEF69A /* CDVSplashScreen.m */; };
+		202F588F489B49D4AE8869AF /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A6446790BC4079A9133A6C /* CDVViewController+SplashScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,10 @@
 		E00321306416424CBCEF5642 /* AudioToolbox.framework */ = {isa = PBXFileReference; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		9A93C5A9E3E44BDC9A14FED0 /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		6FB6DB7C1CB94F348F1416AB /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		666A6E61F8FC4B3280AEF69A /* CDVSplashScreen.m */ = {isa = PBXFileReference; name = "CDVSplashScreen.m"; path = "cordova-plugin-splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		52A6446790BC4079A9133A6C /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		1C1021023B5C40DE851E5A7A /* CDVSplashScreen.h */ = {isa = PBXFileReference; name = "CDVSplashScreen.h"; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		A5501D269E5E4ADD9C9B0280 /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +199,10 @@
 				DFED40F6A9A14B13BCBF6FB9 /* CDVNotification.h */,
 				9A93C5A9E3E44BDC9A14FED0 /* IonicKeyboard.m */,
 				6FB6DB7C1CB94F348F1416AB /* IonicKeyboard.h */,
+				666A6E61F8FC4B3280AEF69A /* CDVSplashScreen.m */,
+				52A6446790BC4079A9133A6C /* CDVViewController+SplashScreen.m */,
+				1C1021023B5C40DE851E5A7A /* CDVSplashScreen.h */,
+				A5501D269E5E4ADD9C9B0280 /* CDVViewController+SplashScreen.h */,
 			);
 			name = Plugins;
 			path = "SeoulTour/Plugins";
@@ -311,6 +321,8 @@
 				A17C991DDA6345ABB6921923 /* DisableStatusbar.m in Sources */,
 				6F3330ABB92249CEABD78736 /* CDVNotification.m in Sources */,
 				CDA7D8A127C14AF88A91BDFB /* IonicKeyboard.m in Sources */,
+				CD0391A780EF42C18FBF16EE /* CDVSplashScreen.m in Sources */,
+				202F588F489B49D4AE8869AF /* CDVViewController+SplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

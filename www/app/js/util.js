@@ -610,7 +610,7 @@ Template7.module.util = (function (app) {
          * 어플리케이션 커버 이미지를 숨김
          */
         hideCover: function() {
-            $$('#cover').hide();
+            navigator.splashscreen.hide();
         },
 
         /**

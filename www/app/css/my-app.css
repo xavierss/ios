@@ -1,12 +1,7 @@
-#cover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 5100;
-    background-color: #03a9f4;
-    background-size: cover;
+html,body {
+    -webkit-overflow-scrolling : touch !important;
+    overflow: auto !important;
+    height: 100% !important;
 }
 
 #mapOverlay {
@@ -69,7 +64,3 @@ div[class*="col-"] {
 
 /* 뷰 네비게이션 색*/
 .view .navbar, .picker-modal .toolbar { color: white; background: #ff2d55; }
-
-#contentView {
-    cursor:none;
-}
