@@ -444,10 +444,6 @@ Template7.module.map = (function (app) {
                         new OpenLayers.Rule({
                             symbolizer: {
                                 "Point" : {
-                                    fillColor: '#ff0e2c',
-                                    strokeColor: 'white',
-                                    strokeWidth: 2,
-                                    pointRadius: 7,
                                     fontSize: "14px",
                                     fontWeight: "bold",
                                     fontColor: '#1441a6',

@@ -1,5 +1,5 @@
 /*
-html,body {
+div#contentView {
     -webkit-overflow-scrolling : touch !important;
     overflow: auto !important;
     height: 100% !important;
