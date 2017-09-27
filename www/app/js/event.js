@@ -94,6 +94,7 @@ Template7.module.event = (function (app) {
                 // 컨텐츠뷰를 탭
                 $$('#contentView').on('tab:show', function () {
                     $$('.map-speed-dial').hide();
+                    Template7.module.util.dataLabelInit();
                 });
 
                 // 따릉이 뷰가 처음 로드 되면 따릉이 데이터를 가져온다.
@@ -170,6 +171,7 @@ Template7.module.event = (function (app) {
                 // 셋팅 뷰를 탭
                 $$('#settingView').on('tab:show', function () {
                     $$('.map-speed-dial').hide();
+                    Template7.module.util.dataLabelInit();
                 });
 
                 // 관광명소 리스트 위치 클릭
@@ -672,7 +674,9 @@ Template7.module.event = (function (app) {
                         Template7.module.db.deleteRoutes();
                         Template7.module.db.deleteTrackings();
                         Template7.module.db.deleteVisits();
-                        Template7.module.db.deleteAppInfo();
+                        // Template7.module.db.deleteAppInfo();
+
+                        Template7.module.util.dataLabelInit();
                     });
                 });
             }

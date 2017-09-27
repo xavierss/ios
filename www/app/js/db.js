@@ -426,6 +426,30 @@ Template7.module.db = (function (app) {
             }).done(function(appInfo) {
                 typeof callback === 'function' && callback(appInfo);
             });
+        },
+
+        selectVisitCount: function(callback) {
+            db.query('select count(*) as count from ' + VISIT_DATABASE_NAME, [] ).fail(function(tx, err) {
+                console.log(VISIT_DATABASE_NAME + ' 방문 카운트 데이터 조회를 실패했습니다. -> ' + err.message);
+            }).done(function(datas) {
+                typeof callback === 'function' && callback(datas[0]);
+            });
+        },
+
+        selectTrackingCount: function(callback) {
+            db.query('select count(*) as count from ' + TRACKING_DATABASE_NAME, [] ).fail(function(tx, err) {
+                console.log(TRACKING_DATABASE_NAME + ' 트래킹 카운트 데이터 조회를 실패했습니다. -> ' + err.message);
+            }).done(function(datas) {
+                typeof callback === 'function' && callback(datas[0]);
+            });
+        },
+
+        selectRouteCount: function(callback) {
+            db.query('select count(*) as count from ' + ROUTE_DATABASE_NAME, [] ).fail(function(tx, err) {
+                console.log(ROUTE_DATABASE_NAME + ' 길찾기 카운트 데이터 조회를 실패했습니다. -> ' + err.message);
+            }).done(function(datas) {
+                typeof callback === 'function' && callback(datas[0]);
+            });
         }
     };
 }(myApp));

@@ -610,7 +610,9 @@ Template7.module.util = (function (app) {
          * 어플리케이션 커버 이미지를 숨김
          */
         hideCover: function() {
-            navigator.splashscreen.hide();
+            if(navigator.splashscreen) {
+                navigator.splashscreen.hide();
+            }
         },
 
         /**
@@ -810,6 +812,20 @@ Template7.module.util = (function (app) {
             });
 
             Template7.module.map.clearTrackingLayerNoGMLFeature();
+        },
+
+        dataLabelInit: function() {
+            Template7.module.db.selectVisitCount(function(data){
+                $$('#myVisitCountLabel').text(data.count);
+            });
+
+            Template7.module.db.selectTrackingCount(function(data){
+                $$('#myTrackingCountLabel').text(data.count);
+            });
+
+            Template7.module.db.selectRouteCount(function(data){
+                $$('#myRouteCountLabel').text(data.count);
+            });
         }
     }
 }(myApp));
