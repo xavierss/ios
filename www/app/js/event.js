@@ -78,11 +78,13 @@ Template7.module.event = (function (app) {
                     var active = $$(this).hasClass('active');
                     if(active) {
                         var view = myApp.getCurrentView();
-                        if(view.history.length > 2) {
-                            view.router.back({url: view.initialPagesUrl[0], force: true});
+                        view.back();
+
+                        /*if(view.history.length > 2) {
+                            view.router.back({url: view.history[0], force: true, ignoreCache: false});
                         } else {
                             view.back();
-                        }
+                        }*/
                     }
                 });
 

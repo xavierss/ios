@@ -357,7 +357,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				PRODUCT_NAME = "방방곡곡 with 따릉이";
+				PRODUCT_NAME = "방방곡곡";
 			};
 			name = Debug;
 		};
@@ -379,7 +379,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				PRODUCT_NAME = "방방곡곡 with 따릉이";
+				PRODUCT_NAME = "방방곡곡";
 			};
 			name = Release;
 		};

@@ -15,7 +15,7 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
-    <name>방방곡곡 with 따릉이</name>
+    <name>방방곡곡</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
