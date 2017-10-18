@@ -482,7 +482,7 @@ Template7.module.util = (function (app) {
                     feature.attributes.index = index;
                     feature.attributes.type = 'store';
                     feature.attributes.name = item.storeNm;
-                    feature.attributes.imageUrl = item.storeImage || './images/noimg.gif';
+                    feature.attributes.imageUrl = item.storeImage || './images/noimg.png';
 
                     feature.attributes.storeAddr = item.storeAddr;
                     feature.attributes.storeGood = item.storeGood;

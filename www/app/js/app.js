@@ -374,9 +374,32 @@ var runApplication = function (moduls) {
                         $$('#dbRouteResult ul.reoute-datas').show();
                     }
 
+
                     var html = '';
                     for(var i = 0, len = routes.length; i < len; i++) {
-                        html += Template7.templates.dbRouteTemplate($$.extend({}, {seq: i + 1}, routes[i]));
+                        var route = routes[i];
+                        var type = route.route_type;
+
+                        switch(type) {
+                            case 'bike':
+                                route.imageUrl = './images/icons/bike.png';
+                                route.title = '따릉이 대여소';
+                                break;
+                            case 'tour':
+                                route.imageUrl = './images/icons/photo-camera.png';
+                                route.title = '관광명소';
+                                break;
+                            case 'park':
+                                route.imageUrl = './images/icons/park.png';
+                                route.title = '공원';
+                                break;
+                            case 'nomal':
+                            default:
+                                route.imageUrl = './images/icons/route.png';
+                                route.title = '길찾기';
+                                break;
+                        }
+                        html += Template7.templates.dbRouteTemplate($$.extend({}, {seq: i + 1}, route));
                     }
                     $$('#dbRouteResult ul.reoute-datas').append(html);
                 });

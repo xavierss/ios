@@ -711,7 +711,7 @@ Template7.module.event = (function (app) {
                     var routeHTMl = '';
                     items.forEach(function (value) {
                         if(value.address.indexOf('서울') >= 0) {
-                            value.imageUrl = value.imageUrl || './images/noimg.gif';
+                            value.imageUrl = value.imageUrl || './images/noimg.png';
                             routeHTMl += Template7.templates.routeResultTemplate(value);
                         }
                     });
