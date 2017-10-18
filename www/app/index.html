@@ -138,26 +138,28 @@
                         <ul>
                             <li>
                                 <div class="item-content">
-                                    <div class="item-media"><i id='btnStartMyLocation' class="f7-icons color-blue">flag</i></div>
+                                    <div class="item-media"><i class="f7-icons color-blue">flag</i></div>
                                     <div class="item-inner">
                                         <div class="item-input">
                                             <input id='txtStart' type="text" class='enter-key-trigger routing-search' value="" placeholder="출발지를 입력하세요." data-for="btnStart">
                                         </div>
                                         <div class="item-after">
-                                            <a id='btnStart' href="#"><i class="f7-icons color-blue">search</i></a>
+                                            <a id='btnStartMyLocation' href="#"><i class="f7-icons color-blue ion-android-locate"></i></a>
+                                            <a id='btnStart' href="#" style="margin-left: 10px;"><i class="f7-icons color-blue">search</i></a>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="item-content">
-                                    <div class="item-media"><i id='btnEndMyLocation' class="f7-icons color-red">flag</i></div>
+                                    <div class="item-media"><i class="f7-icons color-red">flag</i></div>
                                     <div class="item-inner">
                                         <div class="item-input">
                                             <input id='txtEnd' type="text" class='enter-key-trigger routing-search' value="" placeholder="도착지를 입력하세요." data-for="btnEnd">
                                         </div>
                                         <div class="item-after">
-                                            <a id='btnEnd' href="#"><i class="f7-icons color-blue">search</i></a>
+                                            <a id='btnEndMyLocation' href="#"><i class="f7-icons color-blue ion-android-locate"></i></a>
+                                            <a id='btnEnd' href="#" style="margin-left: 10px;"><i class="f7-icons color-blue">search</i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -546,9 +548,9 @@
         <div class="row">
             <div class="col-100">
                 <div class="row" style="align-items: center;">
-                    <div class="col-20"><a class='btnRouteStart' href="#" data-lon="{{startLon}}" data-lat="{{startLat}}"><img src="{{imageFirst}}"></a></div>
-                    <div class="col-60" style="text-align: center; color: white;">{{info}}</div>
-                    <div class="col-20"><a class='btnRouteEnd' href="#" data-lon="{{endLon}}" data-lat="{{endLat}}"><img src="{{imageSecond}}"></a></div>
+                    <div class="col-25"><a class='btnRouteStart' href="#" data-lon="{{startLon}}" data-lat="{{startLat}}"><img src="{{imageFirst}}" width="39" height="39"></a></div>
+                    <div class="col-50" style="text-align: center; color: white;">{{info}}</div>
+                    <div class="col-25"><a class='btnRouteEnd' href="#" data-lon="{{endLon}}" data-lat="{{endLat}}"><img src="{{imageSecond}}" width="39" height="39"></a></div>
                 </div>
                 <div class="row">
                     <div class="col-100">
@@ -594,6 +596,7 @@
                 <div class="item-media"><img src="{{imageUrl}}" width="50"></div>
                 <div class="item-inner">
                     <div class="item-title-row">
+                        <div class="item-title">{{title}}</div>
                         <div class="item-after">{{regist_dt_str}}</div>
                     </div>
                     <div class="item-text">{{start_name}} → {{end_name}}</div>

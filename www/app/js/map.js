@@ -250,9 +250,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/start.png',
-                                graphicWidth: 30,
+                                graphicWidth: 39,
                                 graphicHeight: 39,
-                                graphicXOffset: -15,
+                                graphicXOffset: -19.5,
                                 graphicYOffset: -39,
                                 labelYOffset: -8,
                                 fontSize: "14px",
@@ -273,9 +273,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/arrival.png',
-                                graphicWidth: 30,
+                                graphicWidth: 39,
                                 graphicHeight: 39,
-                                graphicXOffset: -15,
+                                graphicXOffset: -19.5,
                                 graphicYOffset: -39,
                                 labelYOffset: -8,
                                 fontSize: "14px",
@@ -311,9 +311,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/t1.png',
-                                graphicWidth: 30,
+                                graphicWidth: 39,
                                 graphicHeight: 39,
-                                graphicXOffset: -15,
+                                graphicXOffset: -19.5,
                                 graphicYOffset: -39,
                                 cursor: 'pointer'
                             }
@@ -330,9 +330,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/t2.png',
-                                graphicWidth: 30,
+                                graphicWidth: 39,
                                 graphicHeight: 39,
-                                graphicXOffset: -15,
+                                graphicXOffset: -19.5,
                                 graphicYOffset: -39,
                                 cursor: 'pointer'
                             }
@@ -399,7 +399,8 @@ Template7.module.map = (function (app) {
                                 fillColor: '#ff0e2c',
                                 strokeColor: 'white',
                                 strokeWidth: 2,
-                                pointRadius: 7
+                                pointRadius: 7,
+                                graphicName: 'square'
                                 /*fontSize: "14px",
                                 fontWeight: "bold",
                                 fontColor: '#1441a6',
@@ -416,7 +417,8 @@ Template7.module.map = (function (app) {
             // 위치찾기 레이어
             var searchLocationLayerStyle = new OpenLayers.Style({
                 pointRadius: 18,
-                externalGraphic: "lib/OpenLayers-ext/img/pins.png",
+                // externalGraphic: "lib/OpenLayers-ext/img/pins.png",
+                externalGraphic: './images/icons/map-marker.png',
                 backgroundGraphic: "lib/OpenLayers-ext/img/pinsback.png",
                 graphicYOffset:-36,
                 backgroundXOffset: 0,
@@ -489,8 +491,8 @@ Template7.module.map = (function (app) {
                     "default": new OpenLayers.Style({}, {
                         rules: [
                             new OpenLayers.Rule({
-                                minScaleDenominator: 800,
-                                maxScaleDenominator: 14000,
+                                // minScaleDenominator: 800,
+                                // maxScaleDenominator: 14000,
                                 symbolizer: {
                                     pointRadius: 16,
                                     graphicName: "fa-blazon",
@@ -524,8 +526,8 @@ Template7.module.map = (function (app) {
                     "select": new OpenLayers.Style({}, {
                         rules: [
                             new OpenLayers.Rule({
-                                minScaleDenominator: 800,
-                                maxScaleDenominator: 14000,
+                                // minScaleDenominator: 800,
+                                // maxScaleDenominator: 14000,
                                 symbolizer: {
                                     pointRadius: 24,
                                     symbolYOffset: -24,
@@ -536,12 +538,15 @@ Template7.module.map = (function (app) {
                                     label : "${name}",
                                     labelYOffset: -8,
                                     labelOutlineWidth: 2,
-                                    labelOutlineColor: "white"
+                                    labelOutlineColor: "white",
+                                    graphicZIndex: 2000,
+                                    backgroundGraphicZIndex: 1500
                                 }
                             })
                         ]
                     })
                 }),
+                rendererOptions: { zIndexing: true },
                 renderers: ["SVG"],
                 eventListeners: {
                     'featureclick': function(data) {

@@ -266,16 +266,20 @@ var runApplication = function (moduls) {
                         switch(type) {
                             case 'bike':
                                 route.imageUrl = './images/icons/bike.png';
+                                route.title = '따릉이 대여소';
                                 break;
                             case 'tour':
                                 route.imageUrl = './images/icons/photo-camera.png';
+                                route.title = '관광명소';
                                 break;
                             case 'park':
                                 route.imageUrl = './images/icons/park.png';
+                                route.title = '공원';
                                 break;
                             case 'nomal':
                             default:
                                 route.imageUrl = './images/icons/route.png';
+                                route.title = '길찾기';
                                 break;
                         }
 
