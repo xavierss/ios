@@ -250,9 +250,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/start.png',
-                                graphicWidth: 39,
+                                graphicWidth: 30,
                                 graphicHeight: 39,
-                                graphicXOffset: -19.5,
+                                graphicXOffset: -15,
                                 graphicYOffset: -39,
                                 labelYOffset: -8,
                                 fontSize: "14px",
@@ -273,9 +273,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/arrival.png',
-                                graphicWidth: 39,
+                                graphicWidth: 30,
                                 graphicHeight: 39,
-                                graphicXOffset: -19.5,
+                                graphicXOffset: -15,
                                 graphicYOffset: -39,
                                 labelYOffset: -8,
                                 fontSize: "14px",
@@ -311,9 +311,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/t1.png',
-                                graphicWidth: 39,
+                                graphicWidth: 30,
                                 graphicHeight: 39,
-                                graphicXOffset: -19.5,
+                                graphicXOffset: -15,
                                 graphicYOffset: -39,
                                 cursor: 'pointer'
                             }
@@ -330,9 +330,9 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Point" : {
                                 externalGraphic: './images/icons/t2.png',
-                                graphicWidth: 39,
+                                graphicWidth: 30,
                                 graphicHeight: 39,
-                                graphicXOffset: -19.5,
+                                graphicXOffset: -15,
                                 graphicYOffset: -39,
                                 cursor: 'pointer'
                             }
@@ -491,8 +491,8 @@ Template7.module.map = (function (app) {
                     "default": new OpenLayers.Style({}, {
                         rules: [
                             new OpenLayers.Rule({
-                                // minScaleDenominator: 800,
-                                // maxScaleDenominator: 14000,
+                                minScaleDenominator: 800,
+                                maxScaleDenominator: 14000,
                                 symbolizer: {
                                     pointRadius: 16,
                                     graphicName: "fa-blazon",
@@ -526,8 +526,8 @@ Template7.module.map = (function (app) {
                     "select": new OpenLayers.Style({}, {
                         rules: [
                             new OpenLayers.Rule({
-                                // minScaleDenominator: 800,
-                                // maxScaleDenominator: 14000,
+                                minScaleDenominator: 800,
+                                maxScaleDenominator: 14000,
                                 symbolizer: {
                                     pointRadius: 24,
                                     symbolYOffset: -24,
