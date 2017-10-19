@@ -607,12 +607,15 @@ Template7.module.map = (function (app) {
                                     label : "${name}",
                                     labelYOffset: -8,
                                     labelOutlineWidth: 2,
-                                    labelOutlineColor: "white"
+                                    labelOutlineColor: "white",
+                                    graphicZIndex: 2000,
+                                    backgroundGraphicZIndex: 1000
                                 }
                             })
                         ]
                     })
                 }),
+                rendererOptions: { zIndexing: true },
                 renderers: ["SVG"]
             });
 
