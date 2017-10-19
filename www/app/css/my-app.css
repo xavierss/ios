@@ -58,3 +58,12 @@ div[class*="col-"] {
 
 /* 뷰 네비게이션 색*/
 .view .navbar, .picker-modal .toolbar { color: white; background: #ff2d55; }
+
+.olControlAttribution {
+    left: 8px;
+    bottom: 10px;
+}
+
+.olControlScaleLine {
+    bottom: 50px;
+}

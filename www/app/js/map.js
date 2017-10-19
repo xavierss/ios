@@ -185,6 +185,7 @@ Template7.module.map = (function (app) {
             map = new OpenLayers.Map('map', {
                 theme: null,
                 controls: [
+                    new OpenLayers.Control.Attribution(),
                     new OpenLayers.Control.ScaleLine({bottomInUnits: '', bottomOutUnits: ''}),
                     new OpenLayers.Control.TouchNavigation({
                         dragPanOptions: {
@@ -223,6 +224,7 @@ Template7.module.map = (function (app) {
                 [
                     "http://xdworld.vworld.kr:8080/2d/Base/201612/${z}/${x}/${y}.png"
                 ], {
+                    attribution: '<a href="#"><img src="http://map.vworld.kr/images/maps/logo_openplatform_simple.png"></a>',
                     sphericalMercator: true,
                     wrapDateLine: true,
                     numZoomLevels: 20
