@@ -2,5 +2,3 @@
 *.perspectivev3
 *.pbxuser
 .DS_Store
-build/
-SeoulTour/Images.xcassets/AppIcon.appiconset.zip
