@@ -348,10 +348,14 @@ Template7.module.map = (function (app) {
                         }),
                         symbolizer: {
                             "Point" : {
-                                externalGraphic: './images/icons/map-marker.png',
-                                graphicWidth: 32,
-                                graphicHeight: 32,
-                                graphicYOffset: -32,
+                                pointRadius: 18,
+                                externalGraphic: "lib/OpenLayers-ext/img/pins.png",
+                                backgroundGraphic: "lib/OpenLayers-ext/img/pinsback.png",
+                                graphicYOffset:-36,
+                                backgroundXOffset: 0,
+                                backgroundYOffset: -24,
+                                graphicZIndex: 11,
+                                backgroundGraphicZIndex: 10,
                                 cursor: 'pointer'
                             }
                         }

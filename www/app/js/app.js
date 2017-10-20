@@ -292,7 +292,7 @@ var runApplication = function (moduls) {
             // 최근 길찾기 아이템 클릭
             $$(page.container).on('click', '.db-route-item', function() {
                 var id = $$(this).data('id');
-                myApp.showPreloader('조회중입니다.');
+                // myApp.showPreloader('조회중입니다.');
                 Template7.module.db.selectRouteById(id, function(route){
                     var start = {
                         y: route.start_lat,
@@ -321,6 +321,8 @@ var runApplication = function (moduls) {
                                     endPoint: end,
                                     passList: data.passList || null
                                 });
+
+                                myApp.showTab('#mapView');
                             }
                         });
                     } else {
@@ -337,10 +339,11 @@ var runApplication = function (moduls) {
                             Template7.module.db.selectRoutes(function(routes){
                                 Template7.module.db.deleteRouteById(routes[0].id)
                             });
+
+                            myApp.showTab('#mapView');
                         });
                     }
-                    myApp.hidePreloader();
-                    myApp.showTab('#mapView');
+                    // myApp.hidePreloader();
                 });
             });
 
@@ -574,9 +577,16 @@ var runApplication = function (moduls) {
     }
 
     function initPage() {
+        contentPageInit(myApp.views['contentView']);
         bikePageInit(myApp.views['bikeView']);
         tourPageInit(myApp.views['tourView']);
         settingPageInit(myApp.views['settingView']);
+
+        function contentPageInit(page) {
+            $$(page.container).on('page:back', '.page[data-page="myRouteIndex"]', function (e) {
+                Template7.module.util.dataLabelInit();
+            });
+        }
 
         function tourPageInit(page) {
 
@@ -650,6 +660,14 @@ var runApplication = function (moduls) {
         }
 
         function settingPageInit(page) {
+
+            $$(page.container).on('page:back', '.page[data-page="visitListIndex"]', function (e) {
+                Template7.module.util.dataLabelInit();
+            });
+
+            $$(page.container).on('page:back', '.page[data-page="trackingListIndex"]', function (e) {
+                Template7.module.util.dataLabelInit();
+            });
 
             // 설정 -> 찜 목록 초기화
             $$(page.container).on('page:beforeanimation', '.page[data-page="visitListIndex"]', function (e) {
