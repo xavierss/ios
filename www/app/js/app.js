@@ -307,6 +307,7 @@ var runApplication = function (moduls) {
                     };
 
                     if(route.route_type === 'bike') {
+                        myApp.showPreloader('조회중입니다.');
                         Template7.module.util.findDirections(start, end, null, function(data) {
                             if(data.code === Template7.module.rest.SUCCESS_CODE) {
                                 // 착한업소 레이어를 삭제한다.
@@ -321,7 +322,7 @@ var runApplication = function (moduls) {
                                     endPoint: end,
                                     passList: data.passList || null
                                 });
-
+                                myApp.hidePreloader();
                                 myApp.showTab('#mapView');
                             }
                         });
@@ -509,12 +510,17 @@ var runApplication = function (moduls) {
 
             Template7.module.map.panToLonLat(map.getLonLatFromPixel(pixcel));
 
-            for(var index in features) {
-                features[index].renderIntent = 'default';
+            if(feature.renderIntent !== 'select') {
+                Template7.module.map.getMap().getControl('selectControl').select(feature);
             }
 
-            feature.renderIntent = 'select';
-            layer.redraw();
+            for(var index in features) {
+                if(feature !== features[index]) {
+                    if(features[index].renderIntent === 'select') {
+                        Template7.module.map.getMap().getControl('selectControl').unselect(features[index]);
+                    }
+                }
+            }
         });
 
         function getRouteAutocomplete(id, onChange) {

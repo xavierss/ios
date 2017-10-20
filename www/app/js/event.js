@@ -337,7 +337,7 @@ Template7.module.event = (function (app) {
             function mapViewEvent() {
                 // 착한 가게 업소 정보
                 $$('.picker-info').on('picker:open', function () {
-                    $$('.store-swiper-container')[0].swiper.init();
+                    $$('.store-swiper-container')[0].swiper.update();
                 });
 
                 $$('.picker-info').on('picker:close', function () {
@@ -346,9 +346,11 @@ Template7.module.event = (function (app) {
                     var features = layer.features;
 
                     for(var index in features) {
-                        features[index].renderIntent = 'default';
+                        var feature = features[index];
+                        if(feature.renderIntent === 'select') {
+                            Template7.module.map.getMap().getControl('selectControl').unselect(feature);
+                        }
                     }
-                    layer.redraw();
                 });
 
                 $$('#btnLeftMenu').on('click', function(){
@@ -381,8 +383,7 @@ Template7.module.event = (function (app) {
                         myApp.pickerModal('.picker-info');
                         $$('.store-swiper-container')[0].swiper.slideTo(featureId);
 
-                        feature.renderIntent = 'select';
-                        map.getLayersByName('storeLayer')[0].redraw();
+                        Template7.module.map.getMap().getControl('selectControl').select(feature);
                     }
                 });
 

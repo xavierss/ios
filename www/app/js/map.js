@@ -555,12 +555,19 @@ Template7.module.map = (function (app) {
                 rendererOptions: { zIndexing: true },
                 renderers: ["SVG"],
                 eventListeners: {
-                    'featureclick': function(data) {
+                    'featureselected': function(data) {
                         myApp.pickerModal('.picker-info');
                         $$('.store-swiper-container')[0].swiper.slideTo(data.feature.attributes.index);
+                    },
 
-                        data.feature.renderIntent = 'select';
-                        map.getLayersByName('storeLayer')[0].redraw();
+                    'featureunselected': function(data) {
+                        var features = map.getLayersByName('storeLayer')[0].features;
+                        for(var index in features) {
+                            if(features[index].renderIntent === 'select') {
+                                return;
+                            }
+                        }
+                        myApp.closeModal('.picker-modal');
                     }
                 }
             });
@@ -715,7 +722,9 @@ Template7.module.map = (function (app) {
                 this.events.unregister('loadend', this, initLoading);
             }
 
-            var bikeSelectControl = new OpenLayers.Control.SelectFeature([visitDrawLayer, bikeDrawLayer]);
+            var bikeSelectControl = new OpenLayers.Control.SelectFeature([visitDrawLayer, bikeDrawLayer, storeLayer], {
+                id: 'selectControl'
+            });
             map.addControl(bikeSelectControl);
             bikeSelectControl.activate();
         },
