@@ -508,7 +508,7 @@ var runApplication = function (moduls) {
             var pixcel = map.getPixelFromLonLat(lonlat);
             pixcel = new OpenLayers.Pixel(pixcel.x, pixcel.y + 120);
 
-            Template7.module.map.panToLonLat(map.getLonLatFromPixel(pixcel));
+            Template7.module.map.moveToLonLat(map.getLonLatFromPixel(pixcel), map.getZoom());
 
             if(feature.renderIntent !== 'select') {
                 Template7.module.map.getMap().getControl('selectControl').select(feature);

@@ -37,7 +37,7 @@
                             <div class="col-100">
                                 <div class="chip" style="background: rgba(255, 45, 85, 0.8)"><div class="chip-label">전화</div></div>
                             {{#if tel}}
-                                <a href="#"><span>{{tel}}</span></a>
+                                <a href="tel:{{tel}}" class="external"><span>{{tel}}</span></a>
                             {{else}}
                                 <span>등록된 전화번호가 없습니다.</span>
                             {{/if}}

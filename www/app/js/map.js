@@ -556,7 +556,9 @@ Template7.module.map = (function (app) {
                 renderers: ["SVG"],
                 eventListeners: {
                     'featureselected': function(data) {
-                        myApp.pickerModal('.picker-info');
+                        if($$('.picker-modal').css('display') === 'none') {
+                            myApp.pickerModal('.picker-info', false);
+                        }
                         $$('.store-swiper-container')[0].swiper.slideTo(data.feature.attributes.index);
                     },
 
@@ -567,7 +569,9 @@ Template7.module.map = (function (app) {
                                 return;
                             }
                         }
-                        myApp.closeModal('.picker-modal');
+                        if($$('.picker-modal.modal-in').css('display') !== 'none') {
+                            myApp.closeModal('.picker-modal', false);
+                        }
                     }
                 }
             });
@@ -687,6 +691,7 @@ Template7.module.map = (function (app) {
                         ]
                     })
                 }),
+                rendererOptions: { zIndexing: true },
                 renderers: ["SVG"]
             });
 

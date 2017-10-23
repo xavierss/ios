@@ -106,7 +106,23 @@
                         <div class="row" style="height: 100%;">
                             <div class="col-100" style="height: 100%; padding: 0">
                                 <div id='map' style="height: 100%;">
-                                    <div style="position: absolute; right: 13px; z-index: 3110;">
+                                    <div class="row" style="position: absolute; background-color: rgba(53, 149, 255, 0.8); height: 40px; line-height: 30px; text-align: center; z-index:9999; width: 100%;">
+                                        <div class="col-20"></div>
+                                        <div class="col-60">
+                                            <ul id='tipHeader' style="margin: 0; padding: 0; list-style:none;">
+                                                <li style="display: block" data-seq="1">
+                                                    <div style="color: white; font-size: 14px; font-weight: bold;">지도를 "꾹" 눌러보세요.</div>
+                                                </li>
+                                                <li style="display: none" data-seq="2">
+                                                    <div style="color: white; font-size: 14px; font-weight: bold;">트래킹을 시작해보세요.</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-20">
+                                            <a href="#"><i class="icon ion-close-round color-red"></i></a>
+                                        </div>
+                                    </div>
+                                    <div style="position: absolute; right: 13px; z-index: 3110; top: 80px;">
                                         <ul style="list-style:none;">
                                             <li><a id='btnZoomIn' href="#" class="floating-button color-white" style="position: inherit; border-radius: 5%; width: 30px; height: 30px; color: black;"><i class="icon ion-plus-round color-pink"></i></a></li>
                                             <li style="margin-top: 2px;"><a id='btnZoomOut' href="#" class="floating-button color-white" style="position: inherit; border-radius: 5%; width: 30px; height: 30px; color: black;"><i class="icon ion-minus-round color-pink"></i></a></li>
@@ -338,7 +354,7 @@
         <div class="toolbar">
             <div class="toolbar-inner">
                 <div class="left"></div>
-                <div class="right theme-white"><a href="#" class="close-picker">닫기</a></div>
+                <div class="right theme-white"><a id='btnCloseStorePopup' href="#">닫기</a></div>
             </div>
         </div>
         <div class="picker-modal-inner" style="background-color: white;">
@@ -679,6 +695,19 @@
             }, false);
 
             Template7.module.init();
+            setInterval(function() {
+                var $$li_list = $$('#tipHeader li');
+                var $li_listLength = $$li_list.length;
+                var $$first_li = $$('#tipHeader li[style*="display: block"]');
+                $$li_list.css('display', 'none');
+
+                if(parseInt($$first_li.data('seq'))  === $li_listLength) {
+                    $$('#tipHeader li').eq(0).css('display', 'block');
+                } else {
+                    var $$next_li = $$first_li.next().css('display', 'block');
+                }
+
+            }, 2000);
         }, false);
     });
 </script>

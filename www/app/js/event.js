@@ -232,7 +232,7 @@ Template7.module.event = (function (app) {
                     if(play) {
 
                         if(!$$('#checkTracking').is(':checked')) {
-                            myApp.alert('트래킹을 시작하려면 위치추적 기능을 활성화해야합니다.');
+                            myApp.alert('트래킹은 내가 지나온 길을 기록해줍니다. 시작하려면 오른쪽 상단에 있는 버튼(위치추적)을 켜주세요.');
                             return;
                         }
 
@@ -257,7 +257,7 @@ Template7.module.event = (function (app) {
 
                 // 지도 초기화
                 $$('#btnCleanMap').on('click', function() {
-                    myApp.confirm('지도에 그려진 데이터를 지우시겠습니까?', function(){
+                    myApp.confirm('지도에 그려진 정보를 지우시겠습니까?', function(){
                        Template7.module.map.cleanMap();
                     });
                 });
@@ -329,6 +329,22 @@ Template7.module.event = (function (app) {
                         });
                     });
                 });
+
+                $$('#btnCloseStorePopup').on('click', function() {
+                    var map = Template7.module.map.getMap();
+                    var layer = map.getLayersByName('storeLayer')[0];
+                    var features = layer.features;
+
+                    for(var index in features) {
+                        if(features[index].renderIntent === 'select') {
+                            Template7.module.map.getMap().getControl('selectControl').unselect(features[index]);
+                        }
+                    }
+
+                    if($$('.picker-modal.modal-in').css('display') !== 'none') {
+                        myApp.closeModal('.picker-modal', false);
+                    }
+                });
             }
 
             /**
@@ -354,8 +370,8 @@ Template7.module.event = (function (app) {
                 });
 
                 $$('#btnLeftMenu').on('click', function(){
-                    if($$('.picker-modal.modal-in').length > 0) {
-                        myApp.closeModal('.picker-modal');
+                    if($$('.picker-modal.modal-in').css('display') !== 'none') {
+                        myApp.closeModal('.picker-modal', false);
                     }
                 });
 
@@ -376,11 +392,13 @@ Template7.module.event = (function (app) {
                     if(feature) {
                         myApp.closePanel();
                         var geometry = feature.geometry;
-                        var lonlat = new OpenLayers.LonLat(geometry.x, geometry.y - 90);
+                        var lonlat = new OpenLayers.LonLat(geometry.x, geometry.y - 60);
                         var pixcel = map.getPixelFromLonLat(lonlat);
                         Template7.module.map.moveToLonLat(map.getLonLatFromPixel(pixcel), 18);
 
-                        myApp.pickerModal('.picker-info');
+                        if($$('.picker-modal').css('display') === 'none') {
+                            myApp.pickerModal('.picker-info', false);
+                        }
                         $$('.store-swiper-container')[0].swiper.slideTo(featureId);
 
                         Template7.module.map.getMap().getControl('selectControl').select(feature);

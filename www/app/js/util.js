@@ -59,7 +59,7 @@ Template7.module.util = (function (app) {
                     for(var index in bikes) {
                         var bike = bikes[index];
                         var distance = bike['distance'];
-                        var time = '(도보 ' + Math.round(distance / 4000 * 60) + '분)';
+                        var time = '(도보 ' + Math.round(distance / 2000 * 60) + '분)';
                         bike['distance'] = (distance > 999 ? '약 ' + (distance / 1000) + 'km' + ' ' + time : '약 ' + distance + 'm' + ' ' + time);
                         bikeTemplate += Template7.templates['bikeTemplate'](bike);
                     }
@@ -393,6 +393,7 @@ Template7.module.util = (function (app) {
             myApp.showPreloader('조회중입니다.');
             Template7.module.util.findDirections(start, end, null, function(routeData) {
                 Template7.module.map.clearStoreLayer();
+                Template7.module.map.cleanSearchLocationLayer();
 
                 if(routeData.code === Template7.module.rest.SUCCESS_CODE) {
 
@@ -533,7 +534,7 @@ Template7.module.util = (function (app) {
             var descriptions = data.descriptions;
 
             if(bDistance !== 0) { // 경유지가 없을 경우 자전거 거리가 없다
-                sTime = '<br />' + '(도보 ' + Math.round(sDistance / 4000 * 60) + '분)';
+                sTime = '<br />' + '(도보 ' + Math.round(sDistance / 2000 * 60) + '분)';
                 sInfo = (sDistance > 999 ? '약 ' + (sDistance / 1000) + 'km' + ' ' + sTime : '약 ' + sDistance + 'm' + ' ' + sTime);
                 result = Template7.templates.routePanelTemplate({
                     imageFirst: './images/icons/start.png',
@@ -546,7 +547,7 @@ Template7.module.util = (function (app) {
                     endLat: data.passList[0][1]
                 });
 
-                bTime = '<br />' + '(자전거 ' + Math.round(bDistance / 15000 * 60) + '분)';
+                bTime = '<br />' + '(자전거 ' + Math.round(bDistance / 8000 * 60) + '분)';
                 bInfo = (bDistance > 999 ? '약 ' + (bDistance / 1000) + 'km' + ' ' + bTime : '약 ' + bDistance + 'm' + ' ' + bTime);
                 result += Template7.templates.routePanelTemplate({
                     imageFirst: './images/icons/t1.png',
@@ -558,7 +559,7 @@ Template7.module.util = (function (app) {
                     endLat: data.passList[1][1]
                 });
 
-                eTime = '<br />' + '(도보 ' + Math.round(eDistance / 4000 * 60) + '분)';
+                eTime = '<br />' + '(도보 ' + Math.round(eDistance / 2000 * 60) + '분)';
                 eInfo = (eDistance > 999 ? '약 ' + (eDistance / 1000) + 'km' + ' ' + eTime : '약 ' + eDistance + 'm' + ' ' + eTime);
                 result += Template7.templates.routePanelTemplate({
                     imageFirst: './images/icons/t2.png',
@@ -571,7 +572,7 @@ Template7.module.util = (function (app) {
                     endLat: data.endPoint.y
                 });
             } else {
-                eTime = '<br />' + '(도보 ' + Math.round(eDistance / 4000 * 60) + '분)';
+                eTime = '<br />' + '(도보 ' + Math.round(eDistance / 2000 * 60) + '분)';
                 eInfo = (eDistance > 999 ? '약 ' + (eDistance / 1000) + 'km' + ' ' + eTime : '약 ' + eDistance + 'm' + ' ' + eTime);
                 result += Template7.templates.routePanelTemplate({
                     imageFirst: './images/icons/start.png',
