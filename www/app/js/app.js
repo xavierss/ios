@@ -603,7 +603,7 @@ var runApplication = function (moduls) {
                 var title = $$(this).data('title');
 
                 var lonlat = new OpenLayers.LonLat(x, y);
-                Template7.module.map.moveTo(lonlat.transform('EPSG:4326', Template7.module.map.getMap().getProjection()), 18, title);
+                Template7.module.map.moveTo(lonlat.transform('EPSG:4326', Template7.module.map.getMap().getProjection()), 18, title, {lon: x, lat: y});
 
                 myApp.showTab('#mapView');
             });

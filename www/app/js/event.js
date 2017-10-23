@@ -183,7 +183,7 @@ Template7.module.event = (function (app) {
                     var name = $$(this).data('name');
 
                     var lonlat = new OpenLayers.LonLat(lon, lat);
-                    Template7.module.map.moveTo(lonlat.transform('EPSG:4326', Template7.module.map.getMap().getProjection()), 18, name);
+                    Template7.module.map.moveTo(lonlat.transform('EPSG:4326', Template7.module.map.getMap().getProjection()), 18, name, {lon: lon, lat: lat});
 
                     myApp.showTab('#mapView');
                 });
@@ -351,6 +351,10 @@ Template7.module.event = (function (app) {
              * 지도 화면 이벤트를 적용한다.
              */
             function mapViewEvent() {
+                $$('#btnTipClose').on('click', function(){
+                   $$('#tipPanel').hide();
+                });
+
                 // 착한 가게 업소 정보
                 $$('.picker-info').on('picker:open', function () {
                     $$('.store-swiper-container')[0].swiper.update();
@@ -549,7 +553,7 @@ Template7.module.event = (function (app) {
                     var lat = $$this.data('lat');
                     var title = $$this.data('title');
                     var lonlat = new OpenLayers.LonLat(lon, lat);
-                    Template7.module.map.moveTo(lonlat.transform('EPSG:4326', Template7.module.map.getMap().getProjection()), 18, title);
+                    Template7.module.map.moveTo(lonlat.transform('EPSG:4326', Template7.module.map.getMap().getProjection()), 18, title, {lon: lon, lat: lat});
 
                     myApp.showTab('#mapView');
 

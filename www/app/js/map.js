@@ -317,7 +317,13 @@ Template7.module.map = (function (app) {
                                 graphicHeight: 39,
                                 graphicXOffset: -15,
                                 graphicYOffset: -39,
-                                cursor: 'pointer'
+                                labelYOffset: -8,
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                                fontColor: '#3f4cb9',
+                                label : "${name}",
+                                labelOutlineWidth: 2,
+                                labelOutlineColor: "white"
                             }
                         }
                     }),
@@ -336,7 +342,13 @@ Template7.module.map = (function (app) {
                                 graphicHeight: 39,
                                 graphicXOffset: -15,
                                 graphicYOffset: -39,
-                                cursor: 'pointer'
+                                labelYOffset: -8,
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                                fontColor: '#3f4cb9',
+                                label : "${name}",
+                                labelOutlineWidth: 2,
+                                labelOutlineColor: "white"
                             }
                         }
                     }),
@@ -489,7 +501,47 @@ Template7.module.map = (function (app) {
 
             var searchLocationLayer = new OpenLayers.Layer.Vector('searchLocationLayer', {
                 styleMap: new OpenLayers.StyleMap(searchLocationLayerStyle),
-                renderers: ["SVG"]
+                renderers: ["SVG"],
+                eventListeners: {
+                    'featureselected': function(data) {
+                        var buttons = [
+                            {
+                                text: '출발지',
+                                onClick: function() {
+                                    var lon = data.feature.attributes.lon;
+                                    var lat = data.feature.attributes.lat;
+                                    var title = data.feature.attributes.name;
+
+                                    Template7.module.util.registRouteStart(title, {lon: lon, lat: lat});
+                                    myApp.showTab('#contentView');
+                                }
+                            },
+                            {
+                                text: '도착지',
+                                onClick: function() {
+                                    var lon = data.feature.attributes.lon;
+                                    var lat = data.feature.attributes.lat;
+                                    var title = data.feature.attributes.name;
+
+                                    Template7.module.util.registRouteEnd(title, {lon: lon, lat: lat});
+                                    myApp.showTab('#contentView');
+                                }
+                            },
+                            {
+                                text: '취소',
+                                color: 'red'
+                            }
+                        ];
+
+                        var layer = map.getLayersByName('searchLocationLayer')[0];
+                        var features = layer.features;
+                        for(var index in features) {
+                            Template7.module.map.getMap().getControl('selectControl').unselect(features[index]);
+                        }
+
+                        myApp.actions(buttons);
+                    }
+                }
             });
 
             var storeLayer = new OpenLayers.Layer.Vector('storeLayer', {
@@ -727,7 +779,7 @@ Template7.module.map = (function (app) {
                 this.events.unregister('loadend', this, initLoading);
             }
 
-            var bikeSelectControl = new OpenLayers.Control.SelectFeature([visitDrawLayer, bikeDrawLayer, storeLayer], {
+            var bikeSelectControl = new OpenLayers.Control.SelectFeature([searchLocationLayer, visitDrawLayer, bikeDrawLayer, storeLayer], {
                 id: 'selectControl'
             });
             map.addControl(bikeSelectControl);
@@ -782,7 +834,7 @@ Template7.module.map = (function (app) {
          * @param lonlat OpenLayers.LonLat
          * @param zoom number
          */
-        moveTo: function (lonlat, zoom, label) {
+        moveTo: function (lonlat, zoom, label, options) {
             var layer = null;
 
             if(label) {
@@ -796,11 +848,17 @@ Template7.module.map = (function (app) {
             var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat));
             feature.attributes = {name: label || ''};
             feature.data = $$.extend({}, feature.attributes);
+
+            if(options) {
+                feature.attributes = $$.extend({}, feature.attributes, options);
+            }
+
             layer.addFeatures(feature);
 
             if(label) {
                 feature.bounce(OpenLayers.BounceEffect.SHAKE)
             }
+
 
             zoom = zoom || map.getZoom();
             map.moveTo(lonlat, zoom);

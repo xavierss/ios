@@ -427,6 +427,8 @@ Template7.module.util = (function (app) {
                             myApp.confirm('경로에 따릉이가 있습니다. 따릉이를 이용하시겠습니까?', '', function () {
                                 var startPoint = new OpenLayers.Geometry.Point(data[1].x, data[1].y).transform('EPSG:900913', 'EPSG:4326');
                                 var endPoint = new OpenLayers.Geometry.Point(data[0].x, data[0].y).transform('EPSG:900913', 'EPSG:4326');
+                                var startPointName = data[1].stationNo + '.' + data[1].stationName;
+                                var endPointName = data[0].stationNo + '.' + data[0].stationName;
 
                                 var passList = [];
                                 passList.push([startPoint.x, startPoint.y]);
@@ -438,6 +440,19 @@ Template7.module.util = (function (app) {
                                         Template7.module.util.findRouteStore(data.routeLine);
                                         myApp.hidePreloader();
                                         myApp.showTab('#mapView');
+
+                                        var routePointLayer = Template7.module.map.getMap().getLayersByName('routePoint')[0];
+                                        var features = routePointLayer.features;
+                                        for(var index in features) {
+                                            var feature = features[index];
+                                            if(feature.attributes.pointType === 'PP1') {
+                                                feature.attributes.name = startPointName;
+                                            } else if(feature.attributes.pointType === 'PP2') {
+                                                feature.attributes.name = endPointName;
+                                            }
+                                        }
+
+                                        routePointLayer.redraw();
                                     }
                                     typeof callback === 'function' && callback($$.extend({}, data, {passList: passList}));
                                 });
