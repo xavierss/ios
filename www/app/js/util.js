@@ -422,8 +422,8 @@ Template7.module.util = (function (app) {
 
                     // 찾은길 경로에 따릉이가 있는지 확인한다.
                     Template7.module.rest.selectRouteBike(routeData, function(data) {
-                        // 따릉이가 두개 있을 경우
-                        if(data.length === 2) {
+                        // 따릉이가 두개 이면서 따릉이의 거리가 250 이상일 경우
+                        if(data.length === 2 && data[0].distance > 250) {
                             myApp.confirm('경로에 따릉이가 있습니다. 따릉이를 이용하시겠습니까?', '', function () {
                                 var startPoint = new OpenLayers.Geometry.Point(data[1].x, data[1].y).transform('EPSG:900913', 'EPSG:4326');
                                 var endPoint = new OpenLayers.Geometry.Point(data[0].x, data[0].y).transform('EPSG:900913', 'EPSG:4326');
