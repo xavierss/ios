@@ -890,7 +890,7 @@ Template7.module.map = (function (app) {
             }
 
             if(!radius) {
-                radius = new OpenLayers.Geometry.Polygon.createRegularPolygon(point, 30, 50, 0);
+                radius = new OpenLayers.Geometry.Polygon.createRegularPolygon(point, 30, 35, 0);
                 layer.addFeatures(new OpenLayers.Feature.Vector(radius));
             } else {
                 radius.move(new OpenLayers.LonLat(lonlat.lon, lonlat.lat));
