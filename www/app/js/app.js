@@ -106,6 +106,20 @@ Template7.module = (function(){
                 }
             }
             runApplication(this);
+
+            // 팁 깜박거리는 옵션
+            setInterval(function() {
+                var $$li_list = $$('#tipHeader li');
+                var $li_listLength = $$li_list.length;
+                var $$first_li = $$('#tipHeader li[style*="display: block"]');
+                $$li_list.css('display', 'none');
+
+                if (parseInt($$first_li.data('seq')) === $li_listLength) {
+                    $$('#tipHeader li').eq(0).css('display', 'block');
+                } else {
+                    $$first_li.next().css('display', 'block');
+                }
+            }, 2500);
         }
     }
 }());

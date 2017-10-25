@@ -110,12 +110,8 @@
                                         <div class="col-15"></div>
                                         <div class="col-70">
                                             <ul id='tipHeader' style="margin: 0; padding: 0; list-style:none;">
-                                                <li style="display: block" data-seq="1">
-                                                    <div style="color: white; font-size: 14px; font-weight: bold;">지도를 "꾹" 눌러보세요.</div>
-                                                </li>
-                                                <li style="display: none" data-seq="2">
-                                                    <div style="color: white; font-size: 14px; font-weight: bold;">트래킹을 시작해보세요.</div>
-                                                </li>
+                                                <li style="display: block" data-seq="1"><div style="color: white; font-size: 14px; font-weight: bold;">지도를 "꾹" 눌러보세요.</div></li>
+                                                <li style="display: none" data-seq="2"><div style="color: white; font-size: 14px; font-weight: bold;">트래킹을 시작해보세요.</div></li>
                                             </ul>
                                         </div>
                                         <div class="col-15">
@@ -695,19 +691,6 @@
             }, false);
 
             Template7.module.init();
-            setInterval(function() {
-                var $$li_list = $$('#tipHeader li');
-                var $li_listLength = $$li_list.length;
-                var $$first_li = $$('#tipHeader li[style*="display: block"]');
-                $$li_list.css('display', 'none');
-
-                if (parseInt($$first_li.data('seq')) === $li_listLength) {
-                    $$('#tipHeader li').eq(0).css('display', 'block');
-                } else {
-                    $$first_li.next().css('display', 'block');
-                }
-
-            }, 2500);
         }, false);
     });
 </script>

@@ -298,7 +298,8 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Line" : {
                                 strokeColor: '#3e9ff0',
-                                strokeWidth: 5
+                                strokeWidth: 7,
+                                strokeOpacity: 0.7
                             }
                         }
                     }),
@@ -396,7 +397,8 @@ Template7.module.map = (function (app) {
                         symbolizer: {
                             "Line": {
                                 strokeColor: '#3e9ff0',
-                                strokeWidth: 5
+                                strokeWidth: 7,
+                                strokeOpacity: 0.7
                             }
                         }
                     })
@@ -418,7 +420,8 @@ Template7.module.map = (function (app) {
                                 strokeColor: 'white',
                                 strokeWidth: 2,
                                 pointRadius: 7,
-                                graphicName: 'square'
+                                graphicName: 'square',
+                                graphicZIndex: '1000'
                                 /*fontSize: "14px",
                                 fontWeight: "bold",
                                 fontColor: '#1441a6',
@@ -426,6 +429,13 @@ Template7.module.map = (function (app) {
                                 labelOutlineWidth: 2,
                                 labelOutlineColor: "white",
                                 labelYOffset: -16*/
+                            },
+                            "Polygon" : {
+                                fillColor: '#5ab2ff',
+                                fillOpacity: 0.1,
+                                strokeColor: '#5ab2ff',
+                                strokeOpacity: 0.4,
+                                graphicZIndex: '200'
                             }
                         }
                     })
@@ -496,7 +506,8 @@ Template7.module.map = (function (app) {
 
             var locationLayer = new OpenLayers.Layer.Vector('locationLayer', {
                 styleMap: new OpenLayers.StyleMap(locationLayerStyle),
-                renderers: ["Canvas", "SVG", "VML"]
+                rendererOptions: {zIndexing: true},
+                renderers: ["SVG"]
             });
 
             var searchLocationLayer = new OpenLayers.Layer.Vector('searchLocationLayer', {
@@ -867,12 +878,22 @@ Template7.module.map = (function (app) {
         moveCurrentLocationFeature: function(lonlat) {
             var layer = layer = map.getLayersByName('locationLayer')[0];
             var feature = layer.features[0];
+            var radius = layer.features[1];
+
+            var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
 
             if(feature) {
                 feature.move(new OpenLayers.LonLat(lonlat.lon, lonlat.lat));
             } else {
-                feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat));
+                feature = new OpenLayers.Feature.Vector(point);
                 layer.addFeatures(feature);
+            }
+
+            if(!radius) {
+                radius = new OpenLayers.Geometry.Polygon.createRegularPolygon(point, 30, 50, 0);
+                layer.addFeatures(new OpenLayers.Feature.Vector(radius));
+            } else {
+                radius.move(new OpenLayers.LonLat(lonlat.lon, lonlat.lat));
             }
         },
 

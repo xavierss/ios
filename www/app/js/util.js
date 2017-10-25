@@ -139,6 +139,12 @@ Template7.module.util = (function (app) {
          */
         clearWatchPosition: function() {
             navigator.geolocation.clearWatch(watchId);
+            var layer = Template7.module.map.getMap().getLayersByName('locationLayer')[0];
+            var radius = layer.features[1];
+
+            if(radius) {
+                layer.removeFeatures([radius]);
+            }
 
             /*var baseLayer = Template7.module.map.getMap().baseLayer;
             baseLayer.events.unregister('moveend', baseLayer, Template7.module.util.moveEvent);*/
