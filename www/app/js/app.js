@@ -21,16 +21,18 @@ var tourSteps = [
     {
         step: 0,
         header: '퀵 메뉴',
-        message: '현재위치 확인, 관광명소 찾기, 트래킹 기능을 빠르게 사용할 수 있는 도구를 제공합니다.',
+        message: '현재위치 확인, 관광명소 찾기, 트래킹, 지도 초기화 기능을 빠르게 사용할 수 있는 도구를 제공합니다.',
         element: "#mapSpeedDial",
         action: function () {
-            $$('#mapDial').click();
+            if(!$$('#mapSpeedDial').hasClass('speed-dial-opened')) {
+                $$('#mapDial').click();
+            }
         }
     },
     {
         step: 1,
         header: '현재위치',
-        message: '지도에서 현재 위치를 확인 할 수 있도록 마커를 그려줍니다. 마커를 지우시려면 현재위치를 비활성화 하시면 됩니다.',
+        message: '지도에 현재위치(마커)를 표시합니다. 마커를 지우시려면 현재위치를 비활성화 하시면 됩니다.',
         element: "#btnCurrentLocation"
     },
     {
@@ -41,9 +43,14 @@ var tourSteps = [
     },
     {
         step: 3,
-        header: '지우기',
+        header: '지도 초기화',
         message: '지도에 그려진 길찾기, 따릉이, 출발지, 도착지 등을 지웁니다. 단, 사용자 위치 마커는 지워지지 않습니다.',
-        element: "#btnCleanMap"
+        element: "#btnCleanMap",
+        action: function () {
+            if(!$$('#mapSpeedDial').hasClass('speed-dial-opened')) {
+                $$('#mapDial').click();
+            }
+        }
     },
     {
         step: 4,
@@ -51,31 +58,35 @@ var tourSteps = [
         message: '스위치를 ON 하시면 현재 위치를 추적합니다. 위치추적은 현재위치 기능이 활성화 되어 있어야합니다.',
         element: "#trackingLabel",
         action: function () {
-            $$('#mapDial').click();
+            if($$('#mapSpeedDial').hasClass('speed-dial-opened')) {
+                $$('#mapDial').click();
+            }
         }
     },
     {
         step: 5,
         header: '길 안내 상세보기',
-        message: '길 안내 이후 출발지에서 목적지까지의 총 거리를 안내하고 경로에 따릉이가 있을 경우 따릉이 대여 위치와 반납위치를 알려주고 경로 100m안에 있는 착한 가게 정보도 알려줍니다.',
-        element: "#btnLeftMenu"
+        message: '출발지에서 목적지까지의 총 거리와 시간 그리고 경로 100m 반경 내에 착한업소 목록을 확인 할 수 있습니다.',
+        element: "#btnLeftMenu",
+        action: function() {
+            myApp.showTab('#mapView');
+        }
     },
     {
         step: 6,
         header: '출발지, 도착지 검색',
-        message: '출발지, 도착지를 검색하여 경로를 탐색 할 수 있습니다.',
+        message: '주소, 명칭을 입력하여 출발지 도착지를 검색 할 수있습니다.',
         element: "#txtStart",
         action: function() {
-            $$('#tabContentView').click();
+            myApp.showTab('#contentView');
         }
     },
     {
         step: 7,
         header: '최근이용 검색',
-        message: '최근에 검색한 경로를 목록으로 확인 할 수있습니다.',
+        message: '최근에 이용한 경로를 확인 할 수있습니다.',
         element: "#routeSearchList"
     }
-
 ];
 
 var tourguide = myApp.tourguide(tourSteps, {
