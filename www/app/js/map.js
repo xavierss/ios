@@ -222,7 +222,7 @@ Template7.module.map = (function (app) {
             var vWorldStreet = new OpenLayers.Layer.XYZ(
                 "브이월드 지도",
                 [
-                    "http://xdworld.vworld.kr:8080/2d/Base/201612/${z}/${x}/${y}.png"
+                    "http://xdworld.vworld.kr:8080/2d/Base/201710/${z}/${x}/${y}.png"
                 ], {
                     attribution: '<a href="#"><img src="http://map.vworld.kr/images/maps/logo_openplatform_simple.png"></a>',
                     sphericalMercator: true,

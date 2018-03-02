@@ -6,7 +6,7 @@ Template7.module.rest = (function (app) {
      *
      * @type {string}
      */
-    var DAUM_API = '5c5c3245-ede6-3b05-af5a-9000475ec70c';
+    var DAUM_API = '60e17b74-e520-412d-ae29-7366b221740c';
 
     /**
      * 서버주소
@@ -179,6 +179,7 @@ Template7.module.rest = (function (app) {
 
             data.push("endName=" + encodeURI(params.endName));
             data.push("reqCoordType=WGS84GEO");
+            data.push("resCoordType=EPSG3857");
 
             $$.ajax({
                 url: SERVER_URL + '/proxy.jsp',
@@ -186,7 +187,7 @@ Template7.module.rest = (function (app) {
                 dataType: 'xml',
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 data: {
-                    url: 'https://apis.skplanetx.com/tmap/routes/pedestrian?' + data.join('&')
+                    url: 'https://api2.sktelecom.com/tmap/routes/pedestrian?' + data.join('&')
                 },
                 success: function (data) {
                     typeof callback === 'function' && callback(data, Template7.module.rest.SUCCESS_CODE);
