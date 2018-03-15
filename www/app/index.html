@@ -78,6 +78,7 @@
             <a id='btnDestinationSearch' href="#" style="background-color: white;"><i class="icon f7-icons ion-merge color-pink"></i></a>
             <a id='btnBikeTracking' href="#" style="background-color: white;"><i class="icon f7-icons ion-play color-pink"></i></a>
             <a id='btnCleanMap' href="#" style="background-color: white;"><i class="icon f7-icons ion-trash-a color-pink"></i></a>
+            <a id='btnSynchronize' href="#" style="background-color: white;"><i class="icon f7-icons ion-refresh color-pink"></i></a>
         </div>
     </div>
 
@@ -446,13 +447,14 @@
 <!-- 자전거 템플릿 -->
 <script type="text/template7" id="bikeTemplate">
     <li>
-        <a href="#" class="item-content item-link bike-item" data-lat="{{y}}" data-lon="{{x}}" data-station-no="{{stationNo}}" data-station-name="{{stationName}}" data-rack-tot-cnt="{{rackTotCnt}}">
+        <a href="#" class="item-content item-link bike-item" data-lat="{{y}}" data-lon="{{x}}" data-station-no="{{stationNo}}" data-station-name="{{stationName}}" data-rack-tot-cnt="{{rackTotCnt}}" data-parking-bike-tot-cnt="{{parkingBikeTotCnt}}"">
             <div class="item-media"><img src="./images/icons/bike.png" width="40"></div>
             <div class="item-inner">
                 <div class="item-title-row">
                     <div class="item-title">{{stationNo}}. {{stationName}}</div>
                     <div class="item-after">{{guName}}</div>
                 </div>
+                <div class="item-subtitle">자전거 거치수: {{parkingBikeTotCnt}}대</div>
                 <div class="item-text">{{distance}} / 자전거 거치대: {{rackTotCnt}}</div>
             </div>
         </a>
@@ -643,8 +645,10 @@
 </script>
 
 <!-- cordova Library JS -->
+<!--
 <script type="text/javascript" src="../cordova.js"></script>
 <script type="text/javascript" src="../cordova_plugins.js"></script>
+-->
 
 <!-- Path to Framework7 Library JS -->
 <script type="text/javascript" src="lib/framwork7/framework7.js"></script>

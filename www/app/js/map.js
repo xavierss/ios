@@ -669,7 +669,15 @@ Template7.module.map = (function (app) {
                                     backgroundXOffset: 0,
                                     backgroundYOffset: -24,
                                     graphicZIndex: 11,
-                                    backgroundGraphicZIndex: 10
+                                    backgroundGraphicZIndex: 10,
+
+                                    fontSize: "20px",
+                                    fontWeight: "bold",
+                                    fontColor: '#ff2848',
+                                    label : "${parkingBikeTotCnt}",
+                                    labelYOffset: 45,
+                                    labelOutlineWidth: 2,
+                                    labelOutlineColor: "white"
                                 }
                             })
                         ]
@@ -1043,6 +1051,7 @@ Template7.module.map = (function (app) {
                 var geometry = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
                 var feature = new OpenLayers.Feature.Vector(geometry);
                 feature.attributes.name = $$a.data('station-no') + '. ' + $$a.data('station-name') + '\n' + '자전거 거치대: ' +  $$a.data('rack-tot-cnt');
+                feature.attributes.parkingBikeTotCnt = $$a.data('parking-bike-tot-cnt');
                 features.push(feature);
             });
 

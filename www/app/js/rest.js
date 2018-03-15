@@ -51,6 +51,25 @@ Template7.module.rest = (function (app) {
         },
 
         /**
+         * 따릉이를 동기화한다.
+         * @param callback
+         */
+        bikeSynchronize: function(callback) {
+            $$.ajax({
+                url: SERVER_URL + '/bike/synchronize',
+                method: 'post',
+                dataType: 'json',
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                success: function (data) {
+                    typeof callback === 'function' && callback(data, Template7.module.rest.SUCCESS_CODE);
+                },
+                error: function(error) {
+                    typeof callback === 'function' && callback(error, Template7.module.rest.FAIL_CODE);
+                }
+            });
+        },
+
+        /**
          * 다음 좌표로 주소 검색
          *
          * @param position 좌표(lon, lat)

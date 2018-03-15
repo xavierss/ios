@@ -262,6 +262,16 @@ Template7.module.event = (function (app) {
                     });
                 });
 
+                // 따릉이 동기화
+                $$('#btnSynchronize').on('click', function() {
+                    myApp.confirm('따릉이 데이터를 새로 불러오겠습니까?', function(){
+                        myApp.showPreloader('동기화중입니다.');
+                        Template7.module.rest.bikeSynchronize(function(){
+                            myApp.hidePreloader();
+                        });
+                    });
+                });
+
                 // 현재 위치 버튼
                 $$('#btnCurrentLocation').on('click', function (e) {
                     Template7.module.event.locationClick($$(this));
